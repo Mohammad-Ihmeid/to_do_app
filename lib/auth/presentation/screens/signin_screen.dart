@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:to_do_app/core/extension/padding_extensions.dart';
 import 'package:to_do_app/core/extension/responsive.dart';
+import 'package:to_do_app/core/routes/app_routes.dart';
 import 'package:to_do_app/core/theme/app_color/app_color_light.dart';
 import 'package:to_do_app/core/translation/app_string.dart';
 import 'package:to_do_app/core/utils/app_values.dart';
@@ -79,7 +80,8 @@ class SignInScreen extends StatelessWidget {
                         ),
                         5.sizedWidth,
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () =>
+                              Navigator.pushNamed(context, Routes.signUp),
                           child: Text(
                             AppString.signUP,
                             style: TextStyle(
