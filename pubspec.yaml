@@ -33,6 +33,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.9
   firebase_core: ^2.25.4
+  flutter_bloc: ^8.1.4
+  equatable: ^2.0.5
+  firebase_auth: ^4.17.4
+  dartz: ^0.10.1
+  get_it: ^7.6.7
 
 dev_dependencies:
   flutter_test:

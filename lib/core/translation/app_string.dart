@@ -8,4 +8,9 @@ class AppString {
   static const String signIn = 'SIGN IN';
   static const String signUP = 'Sign up';
   static const String dontHaveAccount = "Don't have an account?";
+
+  //SignUp Screen
+  static const String fullName = 'Full Name';
+  static const String confirmPassword = 'Confirm Password';
+  static const String haveAnAccount = 'Have An Account';
 }
