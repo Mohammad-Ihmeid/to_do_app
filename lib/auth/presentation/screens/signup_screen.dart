@@ -33,9 +33,11 @@ class SignUpScreen extends StatelessWidget {
             case ButtonRequestState.loading:
               return LoadingDialog.show(context, key: UnKey.unKey1);
             case ButtonRequestState.error:
+              LoadingDialog.hide(context);
               AppConstance.messageWarning(state.errorSignUp, context);
               break;
             case ButtonRequestState.success:
+              LoadingDialog.hide(context);
               Navigator.pushReplacementNamed(context, Routes.signIn);
               break;
           }
@@ -77,8 +79,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             5.sizedWidth,
                             GestureDetector(
-                              onTap: () =>
-                                  Navigator.pushNamed(context, Routes.signIn),
+                              onTap: () => Navigator.pop(context),
                               child: Text(
                                 AppString.signIn,
                                 style: TextStyle(

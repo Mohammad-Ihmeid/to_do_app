@@ -14,7 +14,7 @@ class AppConstance {
         behavior: SnackBarBehavior.floating,
         content: Text(
           title,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
       ),
     );
