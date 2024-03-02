@@ -13,4 +13,8 @@ class AppString {
   static const String fullName = 'Full Name';
   static const String confirmPassword = 'Confirm Password';
   static const String haveAnAccount = 'Have An Account';
+
+  //Home Screen
+  static const String toDoList = 'To Do List';
+  static const String listOfToDo = 'List Of ToDo';
 }

@@ -10,6 +10,10 @@ ThemeData getThemeDataLight(BuildContext context) => ThemeData(
       scaffoldBackgroundColor: const Color.fromRGBO(255, 255, 255, 1),
       textTheme: _textTheme(context),
       elevatedButtonTheme: _elevatedButtonThemeData(),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        backgroundColor: AppColorsLight.primaryDarkColor,
+        shape: CircleBorder(),
+      ),
       textButtonTheme: const TextButtonThemeData(
         style: ButtonStyle(
           padding: MaterialStatePropertyAll(EdgeInsets.zero),
@@ -34,6 +38,18 @@ ElevatedButtonThemeData _elevatedButtonThemeData() =>
     );
 
 TextTheme _textTheme(BuildContext context) => TextTheme(
+      bodyMedium: TextStyle(
+        fontSize: 20.sF(context),
+        fontWeight: FontWeight.w700,
+        color: AppColorsLight.primaryDarkColor,
+        letterSpacing: -1,
+      ),
+      bodySmall: TextStyle(
+        fontSize: 18.sF(context),
+        fontWeight: FontWeight.w600,
+        color: AppColorsLight.primaryColor,
+        letterSpacing: -1,
+      ),
       titleLarge: TextStyle(
         fontSize: 16.sF(context),
         color: AppColorsLight.textGray50,
