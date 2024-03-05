@@ -6,6 +6,7 @@ class AppColorsLight {
   static const Color black = Color(0xFF272727);
   static const Color gray = Color(0xFFF0F0F0);
   static const Color white = Color(0xFFFFFFFF);
+  static Color white50 = const Color(0xFFFFFFFF).withOpacity(0.5);
   static const Color textGray = Color(0xFF272727);
   static const Color textGray50 = Color(0x80272727);
   static const Color iconColor = Color(0xFF949494);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/core/extension/responsive.dart';
 import 'package:to_do_app/core/theme/app_color/app_color_light.dart';
+import 'package:to_do_app/core/utils/app_values.dart';
 
 ThemeData getThemeDataLight(BuildContext context) => ThemeData(
       useMaterial3: true,
@@ -30,14 +31,22 @@ ThemeData getThemeDataLight(BuildContext context) => ThemeData(
       ),
     );
 
-ElevatedButtonThemeData _elevatedButtonThemeData() =>
-    const ElevatedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: MaterialStatePropertyAll(AppColorsLight.primaryColor),
+ElevatedButtonThemeData _elevatedButtonThemeData() => ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: AppColorsLight.primaryColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppBorderRadius.s12),
+        ),
       ),
     );
 
 TextTheme _textTheme(BuildContext context) => TextTheme(
+      bodyLarge: TextStyle(
+        fontSize: 18.sF(context),
+        fontWeight: FontWeight.w600,
+        color: AppColorsLight.primaryColor,
+        letterSpacing: -1,
+      ),
       bodyMedium: TextStyle(
         fontSize: 20.sF(context),
         fontWeight: FontWeight.w700,
@@ -45,8 +54,8 @@ TextTheme _textTheme(BuildContext context) => TextTheme(
         letterSpacing: -1,
       ),
       bodySmall: TextStyle(
-        fontSize: 18.sF(context),
-        fontWeight: FontWeight.w600,
+        fontSize: 15.sF(context),
+        fontWeight: FontWeight.w500,
         color: AppColorsLight.primaryColor,
         letterSpacing: -1,
       ),
@@ -57,6 +66,8 @@ TextTheme _textTheme(BuildContext context) => TextTheme(
       titleMedium: TextStyle(
         fontSize: 14.sF(context),
         color: AppColorsLight.white,
+        decoration: TextDecoration.none,
+        decorationThickness: 0,
       ),
       titleSmall: TextStyle(
         fontSize: 12.sF(context),

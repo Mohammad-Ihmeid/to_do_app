@@ -10,9 +10,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     return Scaffold(
-      key: scaffoldKey,
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -28,7 +27,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Text(
                       AppString.toDoList.toUpperCase(),
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     const Icon(
                       Icons.settings,
@@ -66,7 +65,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          BottomSheetScreen().open(context: context, scaffoldKey: scaffoldKey);
+          BottomSheetScreen().open(context: context);
         },
         materialTapTargetSize: MaterialTapTargetSize.padded,
         child: Icon(

@@ -1,120 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:to_do_app/core/extension/responsive.dart';
 import 'package:to_do_app/core/theme/app_color/app_color_light.dart';
 import 'package:to_do_app/core/utils/app_values.dart';
 
-class CustomTextField extends StatefulWidget {
-  const CustomTextField(
-      {super.key,
-      required this.controller,
-      required this.hintText,
-      required this.suffixIcon,
-      this.obscureText = false,
-      this.textInputAction = TextInputAction.next,
-      this.keyboardType = TextInputType.text,
-      this.enabled = true,
-      this.borderRadius = 0.0,
-      this.contentPadding = 0.0,
-      this.fillColor = AppColorsLight.white,
-      this.validator,
-      this.inputFormatters = const []});
-
-  final String hintText;
+class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
-  final TextInputAction textInputAction;
-  final TextInputType keyboardType;
-  final double borderRadius;
-  final bool obscureText, enabled;
+  final Function(String)? onSubmitted;
   final Color fillColor;
-  final double contentPadding;
-  final Widget suffixIcon;
-  final List<TextInputFormatter> inputFormatters;
-  final String? Function(String?)? validator;
-
-  @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
-}
-
-class _CustomTextFieldState extends State<CustomTextField> {
-  bool obscure = false;
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.obscureText) {
-      obscure = true;
-    }
-  }
+  final TextInputAction textInputAction;
+  final TextInputType textInputType;
+  final TextAlign textAlign;
+  final String hintText;
+  final Color hintTextColor;
+  final int maxLines;
+  const CustomTextField({
+    super.key,
+    required this.controller,
+    this.onSubmitted,
+    this.fillColor = AppColorsLight.white,
+    this.textInputAction = TextInputAction.done,
+    this.textInputType = TextInputType.text,
+    this.textAlign = TextAlign.start,
+    this.hintText = '',
+    this.hintTextColor = AppColorsLight.white,
+    this.maxLines = 1,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onTap: () {
-        if (widget.controller.selection ==
-            TextSelection.fromPosition(
-                TextPosition(offset: widget.controller.text.length - 1))) {
-          setState(() {
-            widget.controller.selection = TextSelection.fromPosition(
-                TextPosition(offset: widget.controller.text.length));
-          });
-        }
-      },
+    return TextField(
+      controller: controller,
+      textInputAction: textInputAction,
+      keyboardType: textInputType,
+      textAlign: textAlign,
+      onSubmitted: onSubmitted,
+      cursorColor: AppColorsLight.white,
       onTapOutside: (event) => FocusManager.instance.primaryFocus?.unfocus(),
-      scrollPadding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-      textInputAction: widget.textInputAction,
-      keyboardType: widget.keyboardType,
-      controller: widget.controller,
-      obscureText: obscure,
-      inputFormatters: widget.inputFormatters,
-      validator: widget.validator,
-      cursorColor: AppColorsLight.primaryColor,
-      style: TextStyle(
-        color: AppColorsLight.primaryColor,
-        fontSize: 16.sF(context),
-        fontWeight: FontWeight.w500,
-        decorationThickness: 0,
-      ),
+      style: Theme.of(context).textTheme.titleMedium,
+      maxLines: maxLines,
       decoration: InputDecoration(
-        filled: true,
-        fillColor: AppColorsLight.white,
-        contentPadding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-        suffixIcon: widget.obscureText
-            ? GestureDetector(
-                onTap: () => setState(() => obscure = !obscure),
-                child: Icon(
-                    obscure
-                        ? Icons.visibility_off_outlined
-                        : Icons.visibility_outlined,
-                    color: MaterialStateColor.resolveWith((states) =>
-                        states.contains(MaterialState.focused)
-                            ? AppColorsLight.primaryColor
-                            : AppColorsLight.iconColor),
-                    size: 25.sF(context)))
-            : const SizedBox(),
-        hintText: widget.hintText,
+        //filled: true,
+        //fillColor: fillColor,
+        hintText: hintText,
         hintStyle: TextStyle(
-          color: AppColorsLight.textGray.withOpacity(0.5),
-          fontSize: 16.sF(context),
+          fontSize: 15.sF(context),
+          color: hintTextColor,
         ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppBorderRadius.s12),
-          borderSide: const BorderSide(
-            color: AppColorsLight.textGray50,
-          ),
+          borderSide: const BorderSide(color: AppColorsLight.white),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppBorderRadius.s12),
-          borderSide: const BorderSide(
-            color: AppColorsLight.textGray50,
-          ),
+          borderSide: const BorderSide(color: AppColorsLight.white),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppBorderRadius.s12),
-          borderSide: const BorderSide(
-            color: AppColorsLight.textGray50,
-          ),
+          borderSide: const BorderSide(color: AppColorsLight.white),
         ),
       ),
     );

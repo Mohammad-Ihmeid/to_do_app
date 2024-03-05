@@ -13,7 +13,7 @@ import 'package:to_do_app/core/utils/app_values.dart';
 import 'package:to_do_app/core/utils/assets_manager.dart';
 import 'package:to_do_app/core/utils/enums.dart';
 import 'package:to_do_app/core/utils/unique_key.dart';
-import 'package:to_do_app/core/widget_global/custom_text_field.dart';
+import 'package:to_do_app/core/widget_global/custom_auth_text_field.dart';
 import 'package:to_do_app/core/widget_global/show_loading_dialog.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -130,13 +130,12 @@ class SignInScreen extends StatelessWidget {
   Widget _passwordWidget() {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        return CustomTextField(
+        return CustomAuthTextField(
           controller: context.read<AuthBloc>().passwordController,
           hintText: AppString.password,
           textInputAction: TextInputAction.done,
           keyboardType: TextInputType.visiblePassword,
           obscureText: true,
-          suffixIcon: const SizedBox.shrink(),
         );
       },
     );
@@ -145,12 +144,11 @@ class SignInScreen extends StatelessWidget {
   Widget _emailWidget() {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        return CustomTextField(
+        return CustomAuthTextField(
           controller: context.read<AuthBloc>().emailController,
           hintText: AppString.email,
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.emailAddress,
-          suffixIcon: const SizedBox.shrink(),
         );
       },
     );
