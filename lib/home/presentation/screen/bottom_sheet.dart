@@ -8,6 +8,7 @@ import 'package:to_do_app/core/translation/app_string.dart';
 import 'package:to_do_app/core/utils/app_values.dart';
 import 'package:to_do_app/core/widget_global/custom_date_picker.dart';
 import 'package:to_do_app/core/widget_global/custom_text_field.dart';
+import 'package:to_do_app/home/presentation/components/widget/pick_image_dialog.dart';
 import 'package:to_do_app/home/presentation/controller/bloc_bottom_sheet/bottom_sheet_bloc.dart';
 import 'package:intl/intl.dart';
 
@@ -66,39 +67,51 @@ class BottomSheetScreen {
 
   Widget _imageWidget(BuildContext context) {
     return BlocBuilder<BottomSheetBloc, BottomSheetState>(
+      buildWhen: (previous, current) => previous.image != current.image,
       builder: (context, state) {
-        return Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppPadding.p8),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: state.dateNote != null
-                  ? AppColorsLight.white
-                  : AppColorsLight.white50,
-            ),
-            borderRadius: BorderRadius.circular(AppBorderRadius.s12),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "${AppString.add}  ${AppString.image}  (${AppString.optional})",
-                style: TextStyle(
-                  fontSize: 14.sF(context),
-                  color: state.dateNote != null
-                      ? AppColorsLight.white
-                      : AppColorsLight.white50,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Icon(
-                Icons.image_outlined,
-                color: state.dateNote != null
+        return GestureDetector(
+          onTap: () {
+            PickImageDialog().showPicker(context: context).then((value) {
+              if (value != null) {
+                context.read<BottomSheetBloc>().add(AddImageEvent(value));
+              }
+            });
+          },
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppPadding.p8),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: state.image != ''
                     ? AppColorsLight.white
                     : AppColorsLight.white50,
-                size: 20.sF(context),
-              )
-            ],
+              ),
+              borderRadius: BorderRadius.circular(AppBorderRadius.s12),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  state.image != ''
+                      ? AppString.imageAddedSuccessfully
+                      : "${AppString.add}  ${AppString.image}  (${AppString.optional})",
+                  style: TextStyle(
+                    fontSize: 14.sF(context),
+                    color: state.image != ''
+                        ? AppColorsLight.white
+                        : AppColorsLight.white50,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Icon(
+                  Icons.image_outlined,
+                  color: state.image != ''
+                      ? AppColorsLight.white
+                      : AppColorsLight.white50,
+                  size: 20.sF(context),
+                )
+              ],
+            ),
           ),
         );
       },

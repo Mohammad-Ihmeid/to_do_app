@@ -10,3 +10,11 @@ class ChangeDateNoteEvent extends BottomSheetEvent {
   @override
   List<Object> get props => [dateNote];
 }
+
+class AddImageEvent extends BottomSheetEvent {
+  final String imagePath;
+
+  AddImageEvent(this.imagePath);
+  @override
+  List<Object> get props => [imagePath];
+}

@@ -28,4 +28,8 @@ class AppString {
   static const String description = 'Description';
   static const String deadline = 'Deadline';
   static const String optional = 'Optional';
+  static const String selectImage = 'Select Image From !';
+  static const String camera = 'Camera';
+  static const String galleray = 'Galleray';
+  static const String imageAddedSuccessfully = 'Image added successfully';
 }
