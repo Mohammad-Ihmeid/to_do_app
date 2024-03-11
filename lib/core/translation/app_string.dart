@@ -6,6 +6,13 @@ class AppString {
   static const String image = 'Image';
   static const String toDo = 'To Do';
 
+  //Error
+  static const String addToDoError =
+      'An error occurred while saving the data. Please try again later.';
+  static const String error = "An error occurred. Please try again later";
+  static const String addFirstNote =
+      "There are no To Do Notes. Please add one .";
+
   //SignIn Screen
   static const String email = 'Email';
   static const String password = 'Password';

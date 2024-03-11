@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:to_do_app/core/utils/app_values.dart';
 
 class AppConstance {
@@ -18,5 +19,13 @@ class AppConstance {
         ),
       ),
     );
+  }
+
+  static String formatDate(DateTime date) {
+    // Define date format
+    DateFormat formatter = DateFormat('dd MMMM yyyy');
+    // Format the date
+    String formattedDate = formatter.format(date);
+    return formattedDate;
   }
 }

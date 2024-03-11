@@ -35,7 +35,10 @@ class SqlDb {
      CREATE TABLE ToDoList (
       "ID" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT ,
       "Title" TEXT NOT NULL,
-      "SubTitle" TEXT NOT NULL 
+      "SubTitle" TEXT NOT NULL,
+      "DateCreatedNote" TEXT NOT NULL,
+      "DateDeadlineNote" TEXT NOT NULL,
+      "ImageNote" TEXT NOT NULL 
       )
     ''');
     debugPrint(

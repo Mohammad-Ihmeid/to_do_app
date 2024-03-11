@@ -18,3 +18,8 @@ class AddImageEvent extends BottomSheetEvent {
   @override
   List<Object> get props => [imagePath];
 }
+
+class AddToDoEvent extends BottomSheetEvent {
+  @override
+  List<Object> get props => [];
+}

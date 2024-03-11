@@ -9,5 +9,6 @@ class ImagesAssets {
 }
 
 class IconsAssets {
-  //static const String backgroundHomeIcon = "$iconPath/background_home_icon.png";
+  static const String errorIcon = "$iconPath/cancel.png";
+  static const String empytListIcon = "$iconPath/empty_list.json";
 }

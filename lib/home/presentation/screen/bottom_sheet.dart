@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:to_do_app/core/app_constance.dart';
 import 'package:to_do_app/core/extension/padding_extensions.dart';
 import 'package:to_do_app/core/extension/responsive.dart';
 import 'package:to_do_app/core/services/services_locator.dart';
 import 'package:to_do_app/core/theme/app_color/app_color_light.dart';
 import 'package:to_do_app/core/translation/app_string.dart';
 import 'package:to_do_app/core/utils/app_values.dart';
+import 'package:to_do_app/core/utils/enums.dart';
+import 'package:to_do_app/core/utils/unique_key.dart';
 import 'package:to_do_app/core/widget_global/custom_date_picker.dart';
 import 'package:to_do_app/core/widget_global/custom_text_field.dart';
+import 'package:to_do_app/core/widget_global/show_loading_dialog.dart';
 import 'package:to_do_app/home/presentation/components/widget/pick_image_dialog.dart';
 import 'package:to_do_app/home/presentation/controller/bloc_bottom_sheet/bottom_sheet_bloc.dart';
-import 'package:intl/intl.dart';
 
 class BottomSheetScreen {
-  open({required BuildContext context}) {
+  Future<dynamic> open({required BuildContext context}) {
     return showModalBottomSheet(
       isScrollControlled: true,
       useSafeArea: true,
@@ -28,36 +31,65 @@ class BottomSheetScreen {
       builder: (context) {
         return BlocProvider(
           create: (context) => getIt<BottomSheetBloc>(),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
-            child: SizedBox(
-              height: 80.sH(context),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _titleWidget(),
-                  2.sH(context).sizedHeight,
-                  _descWidget(),
-                  2.sH(context).sizedHeight,
-                  _dateNote(context),
-                  2.sH(context).sizedHeight,
-                  _imageWidget(context),
-                  2.sH(context).sizedHeight,
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColorsLight.white,
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        '${AppString.add}  ${AppString.toDo}'.toUpperCase(),
-                        style: Theme.of(context).textTheme.bodySmall,
-                      ),
-                    ),
-                  ),
-                ],
+          child: BlocListener<BottomSheetBloc, BottomSheetState>(
+            listenWhen: (previous, current) =>
+                previous.saveState != current.saveState,
+            listener: (context, state) {
+              switch (state.saveState) {
+                case ButtonRequestState.normal:
+                  break;
+                case ButtonRequestState.loading:
+                  LoadingDialog.show(context, key: UnKey.unKeyBottomSheet);
+                case ButtonRequestState.error:
+                  LoadingDialog.hide(context);
+                  AppConstance.messageWarning(state.saveError, context);
+                  break;
+                case ButtonRequestState.success:
+                  LoadingDialog.hide(context);
+                  Navigator.pop(context, true);
+                  break;
+              }
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppPadding.p16),
+              child: SizedBox(
+                height: 80.sH(context),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _titleWidget(),
+                    2.sH(context).sizedHeight,
+                    _descWidget(),
+                    2.sH(context).sizedHeight,
+                    _dateNote(context),
+                    2.sH(context).sizedHeight,
+                    _imageWidget(context),
+                    2.sH(context).sizedHeight,
+                    addWidget(context),
+                  ],
+                ),
               ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget addWidget(BuildContext context) {
+    return BlocBuilder<BottomSheetBloc, BottomSheetState>(
+      builder: (context, state) {
+        return SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColorsLight.white,
+            ),
+            onPressed: () =>
+                context.read<BottomSheetBloc>().add(AddToDoEvent()),
+            child: Text(
+              '${AppString.add}  ${AppString.toDo}'.toUpperCase(),
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
         );
@@ -148,7 +180,7 @@ class BottomSheetScreen {
               children: [
                 Text(
                   state.dateNote != null
-                      ? formatDate(state.dateNote!)
+                      ? AppConstance.formatDate(state.dateNote!)
                       : "${AppString.deadline} (${AppString.optional})",
                   style: TextStyle(
                     fontSize: 14.sF(context),
@@ -171,14 +203,6 @@ class BottomSheetScreen {
         );
       },
     );
-  }
-
-  String formatDate(DateTime date) {
-    // Define date format
-    DateFormat formatter = DateFormat('dd MMMM yyyy');
-    // Format the date
-    String formattedDate = formatter.format(date);
-    return formattedDate;
   }
 
   Widget _descWidget() {
