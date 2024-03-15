@@ -72,3 +72,6 @@ flutter:
         - asset: assets/fonts/Montserrat-ExtraBold.ttf
         - asset: assets/fonts/Montserrat-ExtraLight.ttf
         - asset: assets/fonts/Montserrat-Thin.ttf
+    - family: BebasNeue
+      fonts:
+        - asset: assets/fonts/BebasNeue-Regular.ttf    

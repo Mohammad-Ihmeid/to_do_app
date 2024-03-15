@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:to_do_app/core/extension/responsive.dart';
+import 'package:to_do_app/core/routes/app_routes.dart';
 import 'package:to_do_app/core/theme/app_color/app_color_light.dart';
 import 'package:to_do_app/core/utils/app_values.dart';
 import 'package:to_do_app/core/utils/assets_manager.dart';
@@ -84,44 +85,54 @@ class ToDoListComponent extends StatelessWidget {
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         final item = state.toDoList[index];
-                        return Card(
-                          color: cardColor(item.dateDeadlineNote),
-                          child: Padding(
-                            padding: const EdgeInsets.all(AppPadding.p8),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      item.title,
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              Routes.detailToDo,
+                              arguments: item,
+                            );
+                          },
+                          child: Card(
+                            color: cardColor(item.dateDeadlineNote),
+                            child: Padding(
+                              padding: const EdgeInsets.all(AppPadding.p8),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        item.title,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium,
+                                      ),
+                                      showDeadlineIcon(item.dateDeadlineNote),
+                                    ],
+                                  ),
+                                  SizedBox(height: 1.sH(context)),
+                                  SizedBox(
+                                    height: 8.sH(context),
+                                    child: Text(
+                                      item.subTitle,
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleMedium,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                    showDeadlineIcon(item.dateDeadlineNote),
-                                  ],
-                                ),
-                                SizedBox(height: 1.sH(context)),
-                                SizedBox(
-                                  height: 8.sH(context),
-                                  child: Text(
-                                    item.subTitle,
+                                  ),
+                                  SizedBox(height: 1.sH(context)),
+                                  Text(
+                                    "Created at ${item.dateCreatedNote}",
                                     style:
                                         Theme.of(context).textTheme.titleMedium,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                ),
-                                SizedBox(height: 1.sH(context)),
-                                Text(
-                                  "Created at ${item.dateCreatedNote}",
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         );

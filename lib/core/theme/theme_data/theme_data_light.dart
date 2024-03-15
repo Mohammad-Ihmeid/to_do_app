@@ -41,6 +41,27 @@ ElevatedButtonThemeData _elevatedButtonThemeData() => ElevatedButtonThemeData(
     );
 
 TextTheme _textTheme(BuildContext context) => TextTheme(
+      headlineLarge: TextStyle(
+        fontSize: 40.sF(context),
+        fontWeight: FontWeight.w400,
+        fontFamily: 'BebasNeue',
+        color: AppColorsLight.textGray,
+        letterSpacing: -1,
+      ),
+      headlineMedium: TextStyle(
+        fontSize: 35.sF(context),
+        fontWeight: FontWeight.w400,
+        fontFamily: 'BebasNeue',
+        color: AppColorsLight.textGray,
+        letterSpacing: -1,
+      ),
+      headlineSmall: TextStyle(
+        fontSize: 30.sF(context),
+        fontWeight: FontWeight.w400,
+        fontFamily: 'BebasNeue',
+        color: AppColorsLight.textGray,
+        letterSpacing: -1,
+      ),
       bodyLarge: TextStyle(
         fontSize: 18.sF(context),
         fontWeight: FontWeight.w600,
@@ -59,8 +80,19 @@ TextTheme _textTheme(BuildContext context) => TextTheme(
         color: AppColorsLight.primaryColor,
         letterSpacing: -1,
       ),
+      displayMedium: TextStyle(
+        fontSize: 16.sF(context),
+        fontWeight: FontWeight.w400,
+        color: AppColorsLight.textGray,
+      ),
+      displaySmall: TextStyle(
+        fontSize: 14.sF(context),
+        fontWeight: FontWeight.w400,
+        color: AppColorsLight.textGray,
+      ),
       titleLarge: TextStyle(
         fontSize: 16.sF(context),
+        fontWeight: FontWeight.w400,
         color: AppColorsLight.textGray50,
       ),
       titleMedium: TextStyle(
