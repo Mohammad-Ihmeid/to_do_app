@@ -9,8 +9,10 @@ import 'package:to_do_app/home/data/datasource/home_offline_data_source.dart';
 import 'package:to_do_app/home/data/repository/home_repository.dart';
 import 'package:to_do_app/home/domain/repository/base_home_repository.dart';
 import 'package:to_do_app/home/domain/usecases/add_to_do_usecase.dart';
+import 'package:to_do_app/home/domain/usecases/delete_to_do_usecase.dart';
 import 'package:to_do_app/home/domain/usecases/get_to_do_list_usecase.dart';
 import 'package:to_do_app/home/presentation/controller/bloc_bottom_sheet/bottom_sheet_bloc.dart';
+import 'package:to_do_app/home/presentation/controller/bloc_detail/detail_bloc.dart';
 import 'package:to_do_app/home/presentation/controller/bloc_home/home_bloc.dart';
 
 final getIt = GetIt.instance;
@@ -21,6 +23,7 @@ class ServicesLocator {
     getIt.registerFactory(() => AuthBloc(getIt(), getIt()));
     getIt.registerFactory(() => BottomSheetBloc(getIt()));
     getIt.registerFactory(() => HomeBloc(getIt()));
+    getIt.registerFactory(() => DetailBloc(getIt()));
 
     //Use Case
     //Auth
@@ -29,6 +32,8 @@ class ServicesLocator {
     //Home
     getIt.registerLazySingleton(() => AddToDoUseCase(getIt()));
     getIt.registerLazySingleton(() => GetToDoListUseCase(getIt()));
+    //Detail
+    getIt.registerLazySingleton(() => DeleteToDoUseCase(getIt()));
 
     //Repository
     getIt.registerLazySingleton<BaseAuthRepository>(

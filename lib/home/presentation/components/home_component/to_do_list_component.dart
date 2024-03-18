@@ -91,7 +91,13 @@ class ToDoListComponent extends StatelessWidget {
                               context,
                               Routes.detailToDo,
                               arguments: item,
-                            );
+                            ).then((value) {
+                              if (value != null) {
+                                context
+                                    .read<HomeBloc>()
+                                    .add(ShowToDoListEvent());
+                              }
+                            });
                           },
                           child: Card(
                             color: cardColor(item.dateDeadlineNote),

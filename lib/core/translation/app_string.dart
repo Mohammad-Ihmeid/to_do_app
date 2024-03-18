@@ -5,10 +5,14 @@ class AppString {
   static const String add = 'Add';
   static const String image = 'Image';
   static const String toDo = 'To Do';
+  static const String delete = 'Delete';
+  static const String cancel = 'Cancel';
 
   //Error
   static const String addToDoError =
       'An error occurred while saving the data. Please try again later.';
+  static const String deleteToDoError =
+      'An error occurred while delete the data. Please try again later.';
   static const String error = "An error occurred. Please try again later";
   static const String addFirstNote =
       "There are no To Do Notes. Please add one .";

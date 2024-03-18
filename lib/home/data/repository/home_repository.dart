@@ -8,6 +8,7 @@ import 'package:to_do_app/home/data/datasource/home_offline_data_source.dart';
 import 'package:to_do_app/home/domain/entities/to_do.dart';
 import 'package:to_do_app/home/domain/repository/base_home_repository.dart';
 import 'package:to_do_app/home/domain/usecases/add_to_do_usecase.dart';
+import 'package:to_do_app/home/domain/usecases/delete_to_do_usecase.dart';
 
 class HomeRepository extends BaseHomeRepository {
   final BaseHomeOfflineDataSource baseHomeOfflineDataSource;
@@ -35,6 +36,20 @@ class HomeRepository extends BaseHomeRepository {
     } on DataBaseException catch (failure) {
       return Left(LocalDataFailure(failure.message));
     } catch (e) {
+      return const Left(RemoteFailure(AppString.error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> deleteToDo(
+      DeleteToDoParameters parameters) async {
+    try {
+      final result = await baseHomeOfflineDataSource.deleteToDo(parameters);
+      return Right(result);
+    } on DataBaseException catch (failure) {
+      return Left(LocalDataFailure(failure.message));
+    } catch (e) {
+      debugPrint(e.toString());
       return const Left(RemoteFailure(AppString.error));
     }
   }

@@ -4,11 +4,14 @@ import 'package:to_do_app/core/usecase/base_usecase.dart';
 import 'package:to_do_app/db/sqldb.dart';
 import 'package:to_do_app/home/data/model/to_do_model.dart';
 import 'package:to_do_app/home/domain/usecases/add_to_do_usecase.dart';
+import 'package:to_do_app/home/domain/usecases/delete_to_do_usecase.dart';
 
 abstract class BaseHomeOfflineDataSource {
   Future<int> addToDo(AddToDoParameters parameters);
 
   Future<List<ToDoModel>> getToDoList(NoParameters parameters);
+
+  Future<int> deleteToDo(DeleteToDoParameters parameters);
 }
 
 class HomeOfflineDataSource extends BaseHomeOfflineDataSource {
@@ -33,5 +36,17 @@ class HomeOfflineDataSource extends BaseHomeOfflineDataSource {
     return List<ToDoModel>.from(
       (response as List).map((e) => ToDoModel.fromJson(e)),
     );
+  }
+
+  @override
+  Future<int> deleteToDo(DeleteToDoParameters parameters) async {
+    final response = await sqlDb
+        .deleteData("DELETE FROM 'ToDoList' WHERE ID = ${parameters.uid}");
+
+    if (response != 0) {
+      return response;
+    } else {
+      throw DataBaseException(message: AppString.deleteToDoError);
+    }
   }
 }
