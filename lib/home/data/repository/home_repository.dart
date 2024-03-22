@@ -9,6 +9,8 @@ import 'package:to_do_app/home/domain/entities/to_do.dart';
 import 'package:to_do_app/home/domain/repository/base_home_repository.dart';
 import 'package:to_do_app/home/domain/usecases/add_to_do_usecase.dart';
 import 'package:to_do_app/home/domain/usecases/delete_to_do_usecase.dart';
+import 'package:to_do_app/home/domain/usecases/get_to_do_usecase.dart';
+import 'package:to_do_app/home/domain/usecases/update_to_do_usecase.dart';
 
 class HomeRepository extends BaseHomeRepository {
   final BaseHomeOfflineDataSource baseHomeOfflineDataSource;
@@ -50,6 +52,31 @@ class HomeRepository extends BaseHomeRepository {
       return Left(LocalDataFailure(failure.message));
     } catch (e) {
       debugPrint(e.toString());
+      return const Left(RemoteFailure(AppString.error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, ToDo>> getToDo(GetToDoParameters parameters) async {
+    try {
+      final result = await baseHomeOfflineDataSource.getToDo(parameters);
+      return Right(result);
+    } on DataBaseException catch (failure) {
+      return Left(LocalDataFailure(failure.message));
+    } catch (e) {
+      return const Left(RemoteFailure(AppString.error));
+    }
+  }
+
+  @override
+  Future<Either<Failure, int>> updateToDo(
+      UpdateToDoParameters parameters) async {
+    try {
+      final result = await baseHomeOfflineDataSource.updateToDo(parameters);
+      return Right(result);
+    } on DataBaseException catch (failure) {
+      return Left(LocalDataFailure(failure.message));
+    } catch (e) {
       return const Left(RemoteFailure(AppString.error));
     }
   }

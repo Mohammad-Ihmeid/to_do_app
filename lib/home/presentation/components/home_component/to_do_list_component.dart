@@ -90,7 +90,7 @@ class ToDoListComponent extends StatelessWidget {
                             Navigator.pushNamed(
                               context,
                               Routes.detailToDo,
-                              arguments: item,
+                              arguments: item.id,
                             ).then((value) {
                               if (value != null) {
                                 context

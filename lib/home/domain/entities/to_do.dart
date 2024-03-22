@@ -10,12 +10,12 @@ class ToDo extends Equatable {
   final String imageNote;
 
   const ToDo({
-    required this.id,
-    required this.title,
-    required this.subTitle,
-    required this.dateCreatedNote,
-    required this.dateDeadlineNote,
-    required this.imageNote,
+    this.id = 0,
+    this.title = '',
+    this.subTitle = '',
+    this.dateCreatedNote = '',
+    this.dateDeadlineNote = '',
+    this.imageNote = '',
   });
 
   @override

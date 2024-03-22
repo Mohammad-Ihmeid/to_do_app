@@ -16,7 +16,11 @@ import 'package:to_do_app/home/presentation/components/widget/pick_image_dialog.
 import 'package:to_do_app/home/presentation/controller/bloc_bottom_sheet/bottom_sheet_bloc.dart';
 
 class BottomSheetScreen {
-  Future<dynamic> open({required BuildContext context}) {
+  Future<dynamic> open({
+    required BuildContext context,
+    String anyScreen = '',
+    int noteID = 0,
+  }) {
     return showModalBottomSheet(
       isScrollControlled: true,
       useSafeArea: true,
@@ -30,7 +34,8 @@ class BottomSheetScreen {
       context: context,
       builder: (context) {
         return BlocProvider(
-          create: (context) => getIt<BottomSheetBloc>(),
+          create: (context) =>
+              getIt<BottomSheetBloc>()..add(EditToDoEvent(noteID)),
           child: BlocListener<BottomSheetBloc, BottomSheetState>(
             listenWhen: (previous, current) =>
                 previous.saveState != current.saveState,
@@ -65,7 +70,7 @@ class BottomSheetScreen {
                     2.sH(context).sizedHeight,
                     _imageWidget(context),
                     2.sH(context).sizedHeight,
-                    addWidget(context),
+                    addWidget(context, noteID),
                   ],
                 ),
               ),
@@ -76,7 +81,7 @@ class BottomSheetScreen {
     );
   }
 
-  Widget addWidget(BuildContext context) {
+  Widget addWidget(BuildContext context, int noteID) {
     return BlocBuilder<BottomSheetBloc, BottomSheetState>(
       builder: (context, state) {
         return SizedBox(
@@ -85,10 +90,16 @@ class BottomSheetScreen {
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColorsLight.white,
             ),
-            onPressed: () =>
-                context.read<BottomSheetBloc>().add(AddToDoEvent()),
+            onPressed: () {
+              if (noteID == 0) {
+                context.read<BottomSheetBloc>().add(AddToDoEvent());
+              } else {
+                context.read<BottomSheetBloc>().add(UpdateToDoEvent(noteID));
+              }
+            },
             child: Text(
-              '${AppString.add}  ${AppString.toDo}'.toUpperCase(),
+              '${noteID != 0 ? AppString.edit : AppString.add}  ${AppString.toDo}'
+                  .toUpperCase(),
               style: Theme.of(context).textTheme.bodySmall,
             ),
           ),

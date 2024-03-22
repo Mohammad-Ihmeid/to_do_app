@@ -3,6 +3,7 @@ class AppString {
 
   //Common
   static const String add = 'Add';
+  static const String edit = 'Edit';
   static const String image = 'Image';
   static const String toDo = 'To Do';
   static const String delete = 'Delete';

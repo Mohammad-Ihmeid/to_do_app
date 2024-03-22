@@ -4,11 +4,17 @@ import 'package:to_do_app/core/usecase/base_usecase.dart';
 import 'package:to_do_app/home/domain/entities/to_do.dart';
 import 'package:to_do_app/home/domain/usecases/add_to_do_usecase.dart';
 import 'package:to_do_app/home/domain/usecases/delete_to_do_usecase.dart';
+import 'package:to_do_app/home/domain/usecases/get_to_do_usecase.dart';
+import 'package:to_do_app/home/domain/usecases/update_to_do_usecase.dart';
 
 abstract class BaseHomeRepository {
   Future<Either<Failure, int>> addToDo(AddToDoParameters parameters);
 
-  Future<Either<Failure, List<ToDo>>> getToDoList(NoParameters parameters);
+  Future<Either<Failure, int>> updateToDo(UpdateToDoParameters parameters);
 
   Future<Either<Failure, int>> deleteToDo(DeleteToDoParameters parameters);
+
+  Future<Either<Failure, ToDo>> getToDo(GetToDoParameters parameters);
+
+  Future<Either<Failure, List<ToDo>>> getToDoList(NoParameters parameters);
 }

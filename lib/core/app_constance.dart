@@ -28,4 +28,11 @@ class AppConstance {
     String formattedDate = formatter.format(date);
     return formattedDate;
   }
+
+  static DateTime toDate(String date) {
+    // Define date format
+    DateFormat format = DateFormat("dd MMMM yyyy");
+    DateTime dateTime = format.parse(date);
+    return dateTime;
+  }
 }

@@ -23,3 +23,20 @@ class AddToDoEvent extends BottomSheetEvent {
   @override
   List<Object> get props => [];
 }
+
+class UpdateToDoEvent extends BottomSheetEvent {
+  final int noteID;
+
+  UpdateToDoEvent(this.noteID);
+  @override
+  List<Object> get props => [noteID];
+}
+
+class EditToDoEvent extends BottomSheetEvent {
+  final int noteID;
+
+  EditToDoEvent(this.noteID);
+
+  @override
+  List<Object> get props => [noteID];
+}
