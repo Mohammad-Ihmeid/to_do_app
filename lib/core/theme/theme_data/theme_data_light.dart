@@ -97,6 +97,7 @@ TextTheme _textTheme(BuildContext context) => TextTheme(
       ),
       titleMedium: TextStyle(
         fontSize: 14.sF(context),
+        fontWeight: FontWeight.w500,
         color: AppColorsLight.white,
         decoration: TextDecoration.none,
         decorationThickness: 0,

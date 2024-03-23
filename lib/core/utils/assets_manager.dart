@@ -6,6 +6,7 @@ class ImagesAssets {
   static const String logoTextApp = "$imagePath/text_image.svg";
   static const String cameraImage = "$imagePath/camera.png";
   static const String galleryImage = "$imagePath/gallery.png";
+  static const String profileImage = "$imagePath/profile_image.svg";
 }
 
 class IconsAssets {

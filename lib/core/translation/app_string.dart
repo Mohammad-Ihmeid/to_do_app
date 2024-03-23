@@ -44,4 +44,8 @@ class AppString {
   static const String camera = 'Camera';
   static const String galleray = 'Galleray';
   static const String imageAddedSuccessfully = 'Image added successfully';
+
+  //Profile Screen
+  static const String logOut = 'Log Out';
+  static const String changePassword = 'Change Password';
 }
