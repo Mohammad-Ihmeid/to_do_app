@@ -21,7 +21,7 @@ class SqlDb {
 
     Database mydb = await openDatabase(path,
         onCreate: _onCreate,
-        version: 1,
+        version: 2,
         onUpgrade: _onUpgrade); // أنشاء الداتا بيس
 
     //Version لما بدك تعدل على الداتا يعني بدك أضيف جدول جديد مثلا بتزيد ال
@@ -45,7 +45,18 @@ class SqlDb {
         "================== Create DATABASE AND TABLE ==================");
   }
 
-  _onUpgrade(Database db, int oldVersion, int newVersion) {}
+  _onUpgrade(Database db, int oldVersion, int newVersion) async {
+    await db.execute('''
+     CREATE TABLE User (
+      "ID" INTEGER NOT NULL PRIMARY KEY,
+      "UserName" TEXT NOT NULL,
+      "Email" TEXT NOT NULL,
+      "Password" TEXT NOT NULL
+      )
+    ''');
+    debugPrint(
+        "================== Upgrade DATABASE AND TABLE ==================");
+  }
 
   readData(String sql) async {
     Database? mydb = await db;
