@@ -129,7 +129,6 @@ class PickImageDialog {
     }
   }
 
-  //
   selectImageFromCamera(BuildContext context) async {
     XFile? file = await ImagePicker()
         .pickImage(source: ImageSource.camera, imageQuality: 10);
