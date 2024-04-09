@@ -204,8 +204,7 @@ class DetailToDoScreen extends StatelessWidget {
     return BlocBuilder<DetailBloc, DetailState>(
       buildWhen: (previous, current) => previous.toDoNote != current.toDoNote,
       builder: (context, state) {
-        return Padding(
-          padding: const EdgeInsets.only(bottom: AppPadding.p8),
+        return SafeArea(
           child: Text(
             "Created at ${state.toDoNote.dateCreatedNote}",
             textAlign: TextAlign.center,
