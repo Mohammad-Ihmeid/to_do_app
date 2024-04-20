@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:to_do_app/core/extension/responsive.dart';
-import 'package:to_do_app/core/routes/app_routes.dart';
 import 'package:to_do_app/core/services/services_locator.dart';
 import 'package:to_do_app/core/theme/app_color/app_color_light.dart';
 import 'package:to_do_app/core/translation/app_string.dart';
@@ -29,31 +28,31 @@ class HomeScreen extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               shrinkWrap: true,
               slivers: [
-                SliverAppBar(
-                  backgroundColor: Colors.transparent,
-                  pinned: true,
-                  flexibleSpace: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        AppString.toDoList.toUpperCase(),
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      IconButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, Routes.profile),
-                        visualDensity: const VisualDensity(
-                            horizontal: VisualDensity.minimumDensity),
-                        padding: EdgeInsets.zero,
-                        icon: Icon(
-                          Icons.settings,
-                          color: AppColorsLight.black,
-                          size: 25.sF(context),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // SliverAppBar(
+                //   backgroundColor: Colors.transparent,
+                //   pinned: true,
+                //   flexibleSpace: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text(
+                //         AppString.toDoList.toUpperCase(),
+                //         style: Theme.of(context).textTheme.bodyLarge,
+                //       ),
+                //       IconButton(
+                //         onPressed: () =>
+                //             Navigator.pushNamed(context, Routes.profile),
+                //         visualDensity: const VisualDensity(
+                //             horizontal: VisualDensity.minimumDensity),
+                //         padding: EdgeInsets.zero,
+                //         icon: Icon(
+                //           Icons.settings,
+                //           color: AppColorsLight.black,
+                //           size: 25.sF(context),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 SliverAppBar(
                   backgroundColor: Colors.transparent,
                   leadingWidth: 70.sW(context),
