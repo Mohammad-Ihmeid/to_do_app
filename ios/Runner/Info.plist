@@ -27,9 +27,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Permission to access the camera is required to take a picture</string>
+	<string>Access to the camera is necessary to add a photo to your notes</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>The requested permission to access the photo gallery is needed in order to select an image</string>
+	<string>Access to the gallery is necessary to add a photo to your notes</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
